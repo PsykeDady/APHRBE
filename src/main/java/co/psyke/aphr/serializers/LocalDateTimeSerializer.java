@@ -1,4 +1,4 @@
-package co.psyke.serializers;
+package co.psyke.aphr.serializers;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package co.psyke.entitites;
+package co.psyke.aphr.entitites;
 
 import java.time.LocalDateTime;
 

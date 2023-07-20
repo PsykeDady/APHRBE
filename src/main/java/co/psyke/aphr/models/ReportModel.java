@@ -1,4 +1,4 @@
-package co.psyke.models;
+package co.psyke.aphr.models;
 
 import java.time.LocalDateTime;
 

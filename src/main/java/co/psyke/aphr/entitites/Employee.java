@@ -1,4 +1,4 @@
-package co.psyke.entitites;
+package co.psyke.aphr.entitites;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -22,7 +22,6 @@ public class Employee {
 
 	@Id
 	@Email
-	@NotNull
 	private Long id; 
 
 	@NotBlank
