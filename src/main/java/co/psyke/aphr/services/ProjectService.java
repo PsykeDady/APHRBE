@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import co.psyke.aphr.entitites.Project;
 import co.psyke.aphr.repositories.ProjectRepository;
+import java.util.List; 
 
 @Service
 public class ProjectService {
@@ -16,8 +17,8 @@ public class ProjectService {
 		projectRepository.save(p);
 	}
 
-	public void deleteProject(Project p){
-		projectRepository.delete(p);
+	public void deleteProject(Long id){
+		projectRepository.deleteById(id);
 	}
 
 	public Project getProjectById(Long id){
@@ -29,5 +30,9 @@ public class ProjectService {
 			throw new IllegalArgumentException("Project not found");
 		}
 		addProject(p);
+	}
+
+	public List<Project> listProjects() {
+		return projectRepository.findAll();
 	}
 }

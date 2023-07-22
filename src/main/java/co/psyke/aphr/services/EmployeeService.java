@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import co.psyke.aphr.entitites.Employee;
 import co.psyke.aphr.repositories.EmployeeRepository;
+import java.util.List; 
 
 @Service
 public class EmployeeService {
@@ -16,8 +17,8 @@ public class EmployeeService {
 		employeeRepository.save(e);
 	}
 
-	public void deleteEmployee (Employee e){
-		employeeRepository.delete(e);
+	public void deleteEmployee (Long id){
+		employeeRepository.deleteById(id);
 	}
 
 	public Employee getEmployeeById(Long id){
@@ -29,5 +30,9 @@ public class EmployeeService {
 			throw new IllegalArgumentException("Employee not found");
 		}
 		employeeRepository.save(e); 
+	}
+
+	public List<Employee> listEmployees () {
+		return employeeRepository.findAll();
 	}
 }
