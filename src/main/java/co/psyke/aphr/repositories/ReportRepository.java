@@ -10,9 +10,9 @@ import co.psyke.aphr.entitites.Report;
 public interface ReportRepository extends JpaRepository<Report,Long>{
 
 	@Query("""
-			SELECT r.project_id, COUNT(hours) as hours 
+			SELECT r.project, COUNT(hours) as hours 
 			FROM Report r
-			GROUP BY r.project_id
+			GROUP BY r.project
 			""")
 	List<Report> groupByProject (); 
 
