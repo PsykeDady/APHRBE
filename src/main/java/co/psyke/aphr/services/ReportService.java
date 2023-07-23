@@ -35,7 +35,7 @@ public class ReportService {
 			e.setId(rm.employee()); 
 			p.setId(rm.project());
 		}
-		Report r = new Report(null, e, p, rm.date(), rm.hours()); 
+		Report r = new Report(rm.id(), e, p, rm.date(), rm.hours()); 
 
 		return r; 
 	}
@@ -50,10 +50,12 @@ public class ReportService {
 		reportRepository.deleteById(id);
 	}
 
-	public void editReport(Report r){
-		if(reportRepository.findById(r.getId()).isEmpty()){
+	public void editReport(ReportModel rm){
+		if(reportRepository.findById(rm.id()).isEmpty()){
 			throw new IllegalArgumentException("Report not found");
 		}
+
+		Report r = reportModel2Report(rm,false);
 		reportRepository.save(r);
 	}
 
@@ -61,16 +63,74 @@ public class ReportService {
 		return reportRepository.findAll(); 
 	}
 
+	public Report getReport(Long id) {
+		return reportRepository.findById(id).orElse(null); 
+	}
+
 	public List<Report> groupByProject(){
-		return reportRepository.groupByProject();
+		List<Object[]> results= reportRepository.groupByProject();
+		
+		List <Report> reports = new java.util.LinkedList<>(); 
+
+		for (Object[] row : results) {
+			Report r= new Report(); 
+			
+			Project p = (Project) row[0]; 
+			r.setProject(p);
+
+			Double hours = Double.parseDouble(row[1].toString());
+			r.setHours(hours);
+
+			reports.add(r);
+		}
+
+		return reports;
 	}
 
 	public List<Report> groupByProjectEmployeeReports(){
-		return List.of();
+		List<Object[]> results= reportRepository.groupByProjectEmployeeReports();
+		
+		List <Report> reports = new java.util.LinkedList<>(); 
+
+		for (Object[] row : results) {
+			Report r= new Report(); 
+			
+			Project p = (Project) row[0]; 
+			r.setProject(p);
+
+			Employee e = (Employee) row[1]; 
+			r.setEmployee(e);
+
+			Double hours = Double.parseDouble(row[2].toString());
+			r.setHours(hours);
+
+			reports.add(r);
+		}
+
+		return reports;
 	}
 
-	public List<Report> groupByEmployeeReports (){
-		return List.of();
+	public List<Report> groupByEmployeeProjectReports (){
+		List<Object[]> results= reportRepository.groupByEmployeeProjectReports();
+		
+		List <Report> reports = new java.util.LinkedList<>(); 
+
+		for (Object[] row : results) {
+			Report r= new Report(); 
+			
+			Employee e = (Employee) row[0]; 
+			r.setEmployee(e);
+			
+			Project p = (Project) row[1]; 
+			r.setProject(p);
+
+			Double hours = Double.parseDouble(row[2].toString());
+			r.setHours(hours);
+
+			reports.add(r);
+		}
+
+		return reports;
 	}
 
 

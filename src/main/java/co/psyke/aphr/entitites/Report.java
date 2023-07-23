@@ -35,7 +35,7 @@ public class Report {
 	@JoinColumn(name="project_id", nullable = false)
 	private Project project; 
 
-	private LocalDateTime localDateTime; 
+	private LocalDateTime date; 
 
 	private Double hours; 
 

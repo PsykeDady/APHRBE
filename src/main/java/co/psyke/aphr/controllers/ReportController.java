@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,7 @@ import co.psyke.aphr.entitites.Report;
 import co.psyke.aphr.models.ReportModel;
 import co.psyke.aphr.services.ReportService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull; 
+import jakarta.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("/report")
@@ -44,8 +45,8 @@ public class ReportController {
 	}
 
 	@PutMapping(value="")
-	public ResponseEntity<Void> editReport(@RequestBody @Valid Report r) {
-		reportService.editReport(r);
+	public ResponseEntity<Void> editReport(@RequestBody @Valid ReportModel rm) {
+		reportService.editReport(rm);
 
 		return ResponseEntity.ok(null); 
 	}
@@ -58,6 +59,14 @@ public class ReportController {
 		return ResponseEntity.ok().body(reports); 
 	}	
 
+	@GetMapping(value = "{id}")
+	public ResponseEntity<Report> getReport (@PathVariable Long id) {
+		Report report=reportService.getReport(id);
+
+
+		return ResponseEntity.ok().body(report); 
+	}	
+
 	@GetMapping(value = "projects")
 	public ResponseEntity<List<Report>> groupByProject() {
 		List <Report> reports= reportService.groupByProject(); 
@@ -67,14 +76,14 @@ public class ReportController {
 
 	@GetMapping(value = "projectsemployeer")
 	public ResponseEntity<List<Report>> groupByProjectEmployeeReports(){
-		List <Report> reports= reportService.groupByProject(); 
+		List <Report> reports= reportService.groupByProjectEmployeeReports(); 
 
 		return ResponseEntity.ok().body(reports);		
 	}
 
-	@GetMapping(value = "employeer")
-	public ResponseEntity<List<Report>> groupByEmployeeReports(){
-		List <Report> reports= reportService.groupByEmployeeReports(); 
+	@GetMapping(value = "employeerprojectr")
+	public ResponseEntity<List<Report>> groupByEmployeeProjectReports(){
+		List <Report> reports= reportService.groupByEmployeeProjectReports(); 
 
 		return ResponseEntity.ok().body(reports);		
 	}

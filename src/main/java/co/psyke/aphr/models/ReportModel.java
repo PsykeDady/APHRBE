@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import jakarta.validation.constraints.NotNull;
 
 public record ReportModel(
+	Long id, 
+
 	@NotNull
 	Long employee, 
 
