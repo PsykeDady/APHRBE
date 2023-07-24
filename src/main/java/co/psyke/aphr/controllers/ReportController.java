@@ -22,7 +22,7 @@ import jakarta.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("/report")
-@CrossOrigin(originPatterns = "*")
+@CrossOrigin(originPatterns = "*",allowedHeaders = "*")
 public class ReportController {
 	
 	@Autowired

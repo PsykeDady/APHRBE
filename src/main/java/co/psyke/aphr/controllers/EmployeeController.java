@@ -22,7 +22,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/employee")
-@CrossOrigin(originPatterns = "*")
+@CrossOrigin(originPatterns = "*",allowedHeaders = "*")
 public class EmployeeController {
 	
 	@Autowired

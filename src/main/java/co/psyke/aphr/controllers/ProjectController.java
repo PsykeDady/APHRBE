@@ -21,7 +21,7 @@ import jakarta.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("/project")
-@CrossOrigin(originPatterns = "*")
+@CrossOrigin(originPatterns = "*",allowedHeaders = "*")
 public class ProjectController {
 	@Autowired
 	private ProjectService projectService; 
